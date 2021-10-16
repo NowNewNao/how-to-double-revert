@@ -19,9 +19,8 @@ const Home: NextPage = () => {
 
 
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
+          <a href="./about" className={styles.card}>
+            <h2>About &rarr;</h2>
           </a>
 
           <a href="/tech" className={styles.card}>
