@@ -24,9 +24,8 @@ const Home: NextPage = () => {
             <p>Find in-depth information about Next.js features and API.</p>
           </a>
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
+          <a href="/tech" className={styles.card}>
+            <h2>Tech &rarr;</h2>
           </a>
 
           <a
