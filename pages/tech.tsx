@@ -50,6 +50,11 @@ const Tech: NextPage = () => {
           </a>
         </div>
       </main>
+      <div className={styles.footer}>
+        <a href={'/'}>
+        Back to Top
+        </a>
+      </div>
     </div>
   )
 }
