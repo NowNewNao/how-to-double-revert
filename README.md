@@ -1,34 +1,55 @@
 This repository explains how to double revert.
+[Deplyment goes here](https://how-to-double-revert.vercel.app/)
 
-## 
+## 🌳 Branches
 
-First, run the development server:
+- `main`
+- `feature` 
+  - `/tech` Accidentally includes footer that should not be there, but pushed and merged in `main`
+  - `/about` Add about page. No problem happens here.
+- `revert`
+  - `/tech-branch` Revert `feature/tech` as the first revert
+  - `/reverted-tech-branch-to-restore-necessary-code` Revert `revert/tech-branch` to restore wanted changes and fix unwanted changes which was accidentally pushed into `feature/tech` as the second revert
 
-```bash
-npm run dev
-# or
-yarn dev
+## ☝️ Commands
+```git
+git revert {commit_hash}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+*If you get this error 
+error: Commit {commit_hash} is a merge but no -m option was given.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```git
+git revert -m 1 {commit_hash}    
+OR
+git revert -m 2 {commit_hash}
+```
+* `1` for the 'merged branch' and `2` for the 'merge branch'
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+# 🚗 How to revert
 
-## Learn More
+- Switch to `main`
+- Pull the latest `main`
+- Create new branch and switch on it  👈`revert/tech-branch`
+- Copy Merge commit  👈`42ad90c64d3193ef79722b89e346f5f84675f563`
+- Run the command 👈`git revert -m 1 42ad90c64d3193ef79722b89e346f5f84675f563`
+- Push and Merge the branch for revert to `main` 👈` revert/tech-branch` 
+- Switch to `main`
+- Pull the latest `main`
+- Create new branch and switch on it 👈 `revert/reverted-tech-branch-to-restore-necessary-code`
+- Run the command 👈 `git revert -m 1 adaed51d7b9d5386f500c8234924099697916609`
+- Make correction
+- Push and Merge the branch for revert the reverted branch to `main` 👈 `revert/reverted-tech-branch-to-restore-necessary-code`
 
-To learn more about Next.js, take a look at the following resources:
+![graph](./public/commit_graph.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+[The commit history in Github is found here](https://github.com/NowNewNao/how-to-double-revert/commits/main)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 🤔 Why do you need two reverts here?
+To restore the necessary changes that were implemented in the reverted branch 👈 `feature/tech`
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 🤞 Good to know
+The first revert is needed to be done immediately when you realised the production is broken. 
+And you have time to figure out what is the cause of the bug Then do the second revert.
+You have enough time to fix the bug if your production is working as expected by your first revert.
