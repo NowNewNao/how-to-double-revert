@@ -34,7 +34,7 @@ const Tech: NextPage = () => {
             className={styles.card}
             target="_blank"
           >
-            <h2>XState</h2>
+            <h2>XState &rarr;</h2>
             <p>JavaScript and TypeScript finite state machines for the modern web.</p>
           </a>
 
